@@ -17,11 +17,28 @@
             padding: 10px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: fixed; width: 100%; top: 0; z-index: 1000;
         }
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: bold; color: #D32F2F; line-height: 1.2; }
+        .logo { 
+            display: flex; align-items: center; gap: 10px; font-weight: bold; 
+            color: #D32F2F; line-height: 1.2; 
+        }
         .logo span { color: #2E7D32; }
         .logo-img { height: 40px; width: auto; }
         .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; transition: 0.3s; }
         .menu a:hover { color: #D32F2F; }
+
+        /* --- MENU TOGGLE (HAMBURGER) BARU */
+        .menu-toggle {
+            display: none; /* Sembunyikan di desktop */
+            font-size: 2rem;
+            cursor: pointer;
+            color: #D32F2F;
+            order: 2; /* Agar berada di kanan */
+            transition: transform 0.3s ease; /* Transisi untuk animasi ikon */
+        }
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Putar ikon 90 derajat saat menu terbuka */
+            color: #2E7D32; 
+        }
 
         /* --- CONTAINER (ISI HALAMAN) --- */
         .container {
@@ -108,14 +125,6 @@
         }
         .btn-back:hover { background-color: #555; }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 10px; padding: 15px; }
-            .menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-            .container { padding: 20px; margin-top: 80px; }
-            .product-grid { flex-direction: column; }
-        }
-
         /* --- CSS FOOTER --- */
         .footer { background-color: #2c3e50; color: #ecf0f1; padding: 40px 5%; margin-top: 50px; font-size: 0.9rem; }
         .footer-content { display: flex; justify-content: space-between; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
@@ -130,7 +139,56 @@
             margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
         }       
 
- @media (max-width: 768px) { .footer-content { flex-direction: column; } .footer-section { width: 100%; text-align: center; } }
+        /* --- RESPONSIVE (MOBILE) --- */
+        @media (max-width: 768px) {
+            /* START PERUBAHAN MENU HAMBURGER MOBILE */
+            .navbar { 
+                flex-direction: row; 
+                justify-content: space-between; 
+                padding: 10px 5%; 
+            }
+            .menu-toggle { 
+                display: block; /* Tampilkan Tombol Hamburger */
+            }
+            .menu { 
+                display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
+                flex-direction: column; 
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+                position: absolute;
+                top: 60px; /* Jarak dari Navbar */
+                left: 0;
+                padding: 10px 0;
+            }
+            .menu a {
+                margin: 0; 
+                padding: 10px 20px; 
+                border-bottom: 1px solid #eee;
+                color: #333; 
+            }
+            .menu a:last-child {
+                border-bottom: none;
+            }
+            /* Kelas ini yang akan memunculkan menu */
+            .menu.active { 
+                display: flex; 
+            }
+            /* END PERUBAHAN MENU HAMBURGER MOBILE */
+
+            /* Retain other responsive styles */
+            .container { padding: 20px; margin-top: 80px; }
+            .product-grid { flex-direction: column; }
+
+            /* Footer Responsive */
+            .footer-content { flex-direction: column; } 
+            .footer-section { width: 100%; text-align: center; }
+            .footer-section a {
+                display: block; 
+                margin: 5px auto;
+                width: fit-content;
+            }
+        }
     </style>
 </head>
 <body>
@@ -138,9 +196,12 @@
     <nav class="navbar">
         <div class="logo">
             <img src="logo-koperasi.png" alt="Logo" class="logo-img">
-            Koperasi Desa Merah Putih <span>Lamunti Permai</span>
+            KDMP <span>Lamunti Permai</span>
         </div>
-        <div class="menu">
+        
+        <div class="menu-toggle" id="menuToggle">☰</div>
+
+        <div class="menu" id="mainMenu">
             <a href="index.html">Beranda</a>
             <a href="data-anggota.html">Data Anggota</a>
             <a href="unit-usaha.html" style="color: #D32F2F;">Unit Usaha</a>
@@ -198,6 +259,28 @@
         <a href="unit-usaha.html" class="btn-back">← Kembali ke Daftar Unit Usaha</a>
     </div>
 
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        const menuLinks = mainMenu.querySelectorAll('a'); 
+
+        // 1. Event Listener untuk Tombol Toggle (Buka/Tutup Menu)
+        menuToggle.addEventListener('click', function() {
+            mainMenu.classList.toggle('active'); // Toggle class 'active' untuk menampilkan/menyembunyikan menu
+            menuToggle.classList.toggle('open'); // Toggle class 'open' untuk animasi ikon hamburger
+        });
+
+        // 2. Event Listener untuk Menutup Menu Setelah Tautan Diklik
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainMenu.classList.contains('active')) {
+                    mainMenu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                }
+            });
+        });
+    </script>
+
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -219,7 +302,7 @@
             <div class="footer-section">
                 <h4>Legalitas & Prinsip</h4>
                 <p>Badan Hukum No: 123/BH/KOP.KAB/V/2005.</p>
-                <p>Kami menjunjung tinggi prinsip Koperasi: Kekeluargaan, Transparansi, dan Akuntabilitas demi kesejahteraan bersama.</p>
+                <p style="margin-top: 10px;">Kami menjunjung tinggi prinsip Koperasi: Kekeluargaan, Transparansi, dan Akuntabilitas demi kesejahteraan bersama.</p>
             </div>
         </div>
         <div class="footer-bottom">

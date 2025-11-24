@@ -6,27 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Album Panen Raya - KDMP Lamunti Permai</title>
     <style>
-        /* --- GAYA DASAR (Sama dengan sebelumnya) --- */
+        /* --- GAYA DASAR --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #f4f4f4; color: #333; line-height: 1.6; }
         
-        /* Navbar CSS (Singkat) */
-        .navbar { background-color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: bold; color: #D32F2F; }
+        /* Navbar Style */
+        .navbar { 
+            background-color: #fff; display: flex; justify-content: space-between; align-items: center; 
+            padding: 10px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            position: fixed; width: 100%; top: 0; z-index: 1000; 
+        }
+        
+        /* Logo Fix */
+        .logo { 
+            display: flex; align-items: center; gap: 10px; font-weight: bold; 
+            color: #D32F2F; line-height: 1.2; 
+        }
         .logo span { color: #2E7D32; }
         .logo-img { height: 40px; width: auto; }
-        .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; }
+        
+        .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; transition: 0.3s; }
+        .menu a:hover { color: #D32F2F; }
+
+        /* --- MENU TOGGLE (HAMBURGER) BARU */
+        .menu-toggle {
+            display: none; /* Sembunyikan di desktop */
+            font-size: 2rem;
+            cursor: pointer;
+            color: #D32F2F;
+            order: 2; /* Agar berada di kanan */
+            transition: transform 0.3s ease; /* Transisi untuk animasi ikon */
+        }
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Putar ikon 90 derajat saat menu terbuka */
+            color: #2E7D32; 
+        }
 
         /* Container */
         .container { max-width: 1100px; margin: 80px auto 50px; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         h1 { color: #2E7D32; margin-bottom: 10px; text-align: center; }
-        p.desc { text-align: center; max-width: 700px; margin: 0 auto 40px; color: #555; }
+        p.desc { text-align: center; max-width: 750px; margin: 0 auto 40px; color: #555; }
 
         /* --- GRID FOTO ALBUM --- */
         .album-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Foto lebih besar */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 15px;
         }
         
@@ -35,14 +60,20 @@
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: transform 0.3s;
+            background: #eee;
         }
-        .photo-frame:hover { transform: scale(1.02); } /* Efek zoom sedikit */
+        .photo-frame:hover { transform: scale(1.02); }
         
         .photo-frame img {
             width: 100%;
-            height: 250px; /* Tinggi seragam */
+            height: 250px;
             object-fit: cover;
             display: block;
+        }
+        
+        /* Caption di bawah foto */
+        .photo-caption {
+            padding: 10px; text-align: center; font-size: 0.9rem; color: #555; background: #fff;
         }
 
         /* Tombol Navigasi */
@@ -55,10 +86,10 @@
 
 /* --- GAYA UNTUK FOOTER --- */
 .footer {
-    background-color: #2c3e50; /* Warna dasar gelap yang elegan */
+    background-color: #2c3e50; 
     color: #ecf0f1;
     padding: 40px 5%;
-    margin-top: 50px; /* Jarak dari konten atas */
+    margin-top: 50px; 
     font-size: 0.9rem;
 }
 .footer-content {
@@ -70,11 +101,11 @@
 }
 .footer-section {
     width: 30%;
-    min-width: 250px; /* Agar tidak terlalu kecil di HP */
+    min-width: 250px; 
     margin-bottom: 20px;
 }
 .footer-section h4 {
-    color: #D32F2F; /* Merah Koperasi */
+    color: #D32F2F; 
     margin-bottom: 15px;
     border-bottom: 1px solid #4a6d8c;
     padding-bottom: 5px;
@@ -82,12 +113,12 @@
 .footer-section a {
     color: #ecf0f1;
     text-decoration: none;
-    display: block; /* Agar setiap link di baris baru */
+    display: block; 
     margin-bottom: 5px;
     transition: color 0.3s;
 }
 .footer-section a:hover {
-    color: #2E7D32; /* Hijau Koperasi saat hover */
+    color: #2E7D32; 
 }
 .footer-bottom {
     text-align: center;
@@ -99,10 +130,46 @@
 
 /* --- FOOTER KOREKSI SPASI KONTAK --- */
         .footer-section p {
-            margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
+            margin-bottom: 5px; 
         }
 
 @media (max-width: 768px) {
+    /* START PERUBAHAN MENU HAMBURGER MOBILE */
+    .navbar { 
+        flex-direction: row; 
+        justify-content: space-between; 
+        padding: 10px 5%; 
+    }
+    .menu-toggle { 
+        display: block; /* Tampilkan Tombol Hamburger */
+    }
+    .menu { 
+        display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
+        flex-direction: column; 
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+        position: absolute;
+        top: 60px; /* Jarak dari Navbar */
+        left: 0;
+        padding: 10px 0;
+    }
+    .menu a {
+        margin: 0; 
+        padding: 10px 20px; 
+        border-bottom: 1px solid #eee;
+        color: #333; 
+    }
+    .menu a:last-child {
+        border-bottom: none;
+    }
+    /* Kelas ini yang akan memunculkan menu */
+    .menu.active { 
+        display: flex; 
+    }
+    /* END PERUBAHAN MENU HAMBURGER MOBILE */
+
+    /* Footer Responsive */
     .footer-content {
         flex-direction: column;
     }
@@ -111,11 +178,17 @@
         text-align: center;
     }
     .footer-section a {
-        display: inline-block;
-        margin: 0 10px;
+        display: block; 
+        margin: 5px auto;
+        width: fit-content;
     }
-}    
+    
+    .container {
+        padding: 20px; 
+    }
+}
 
+    
 </style>
 </head>
 <body>
@@ -123,41 +196,81 @@
     <nav class="navbar">
         <div class="logo">
             <img src="logo-koperasi.png" alt="Logo" class="logo-img">
-            Koperasi Desa Merah Putih
+            KDMP <span>Lamunti Permai</span>
         </div>
-        <div class="menu">
+        
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        
+        <div class="menu" id="mainMenu">
             <a href="index.html">Beranda</a>
-            <a href="galeri.html">Galeri Utama</a>
+            <a href="data-anggota.html">Data Anggota</a>
+            <a href="unit-usaha.html">Unit Usaha</a>
+            <a href="tentang-kami.html">Tentang Kami</a>
+            <a href="galeri.html" style="color: #D32F2F;">Galeri</a>
+            <a href="kontak.html">Kontak</a>
         </div>
     </nav>
 
     <div class="container">
-        <h1>Album: Panen Raya Padi 2023</h1>
-        <p class="desc">Dokumentasi kegiatan panen raya bersama anggota koperasi di lahan desa seluas 50 hektar. Hasil panen tahun ini meningkat 20% berkat penggunaan pupuk subsidi koperasi.</p>
+        <h1>Album: Panen Raya & Kegiatan Pertanian</h1>
+        <p class="desc">Dokumentasi kegiatan panen raya yang difasilitasi Koperasi, menunjukkan hasil nyata dari dukungan sarana dan prasarana pertanian yang disediakan untuk anggota.</p>
 
         <div class="album-grid">
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1625246333195-58f2167038fa?w=600" alt="Suasana Panen">
+                <img src="https://images.unsplash.com/photo-1594953931326-8360ca024b45?w=600" alt="Panen Padi Bersama">
+                <div class="photo-caption">Panen Padi Musim Tanam Kedua</div>
             </div>
+            
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Hamparan Sawah">
+                <img src="https://images.unsplash.com/photo-1543632204-c104ab4f86d8?w=600" alt="Petani Senang">
+                <div class="photo-caption">Senyum Anggota Koperasi saat Panen</div>
             </div>
+            
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?w=600" alt="Gotong Royong">
+                <img src="https://images.unsplash.com/photo-1599557476834-8c01d4b68e59?w=600" alt="Penyuluhan">
+                <div class="photo-caption">Penyuluhan Penggunaan Pupuk Organik</div>
             </div>
+            
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600" alt="Menimbang Hasil">
+                <img src="https://images.unsplash.com/photo-1596205779013-176b6d5f7560?w=600" alt="Mesin Panen">
+                <div class="photo-caption">Penggunaan Mesin Panen Modern Koperasi</div>
             </div>
+            
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?w=600" alt="Istirahat Bersama">
+                <img src="https://images.unsplash.com/photo-1563214041-002f236965be?w=600" alt="Jual Hasil Panen">
+                <div class="photo-caption">Pengangkutan Hasil Panen untuk Penjualan Kolektif</div>
             </div>
+            
              <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600" alt="Gudang Padi">
+                <img src="https://images.unsplash.com/photo-1534005118749-e588d92376dc?w=600" alt="Pengemasan">
+                <div class="photo-caption">Proses Pengemasan Gabah Kering Koperasi</div>
             </div>
         </div>
 
         <a href="galeri.html" class="btn-back">← Kembali ke Galeri Utama</a>
     </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        const menuLinks = mainMenu.querySelectorAll('a'); 
+
+        // 1. Event Listener untuk Tombol Toggle (Buka/Tutup Menu)
+        menuToggle.addEventListener('click', function() {
+            mainMenu.classList.toggle('active'); // Toggle class 'active' untuk menampilkan/menyembunyikan menu
+            menuToggle.classList.toggle('open'); // Toggle class 'open' untuk animasi ikon hamburger
+        });
+
+        // 2. Event Listener untuk Menutup Menu Setelah Tautan Diklik
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainMenu.classList.contains('active')) {
+                    mainMenu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                }
+            });
+        });
+    </script>
 
 <footer class="footer">
     <div class="footer-content">

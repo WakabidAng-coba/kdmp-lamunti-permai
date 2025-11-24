@@ -23,6 +23,24 @@
         .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; transition: 0.3s; }
         .menu a:hover { color: #D32F2F; }
 
+        /* --- MENU TOGGLE (HAMBURGER) BARU */
+.menu-toggle {
+    display: none; /* Sembunyikan di desktop */
+    font-size: 2rem;
+    cursor: pointer;
+    color: #D32F2F;
+    order: 2;
+    transition: transform 0.3s ease; /* Tambahkan transisi untuk animasi */
+}
+
+/* KELAS BARU UNTUK ANIMASI IKON */
+.menu-toggle.open {
+    /* Putar ikon 90 derajat saat menu terbuka */
+    transform: rotate(90deg); 
+    color: #2E7D32; /* Ubah warna saat terbuka (opsional) */
+}
+/* ... kode CSS lainnya ... */
+        
         /* --- 3. HERO SECTION --- */
         .hero {
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('photo-1500382017468-9049fed747ef.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
@@ -105,15 +123,49 @@
         .footer-section a { color: #ecf0f1; text-decoration: none; display: block; margin-bottom: 5px; transition: color 0.3s; }
         .footer-section a:hover { color: #2E7D32; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #4a6d8c; margin-top: 20px; font-size: 0.8rem; }
-        
-        /* --- FOOTER KOREKSI SPASI KONTAK --- */
-        .footer-section p {
-            margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
-        }
 
+        /* KOREKSI SPASI FOOTER BARU */
+        .footer-section p {
+            margin-bottom: 5px; 
+        }
+        
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .navbar { flex-direction: column; gap: 10px; }
+            
+            /* START PERUBAHAN MENU HAMBURGER */
+            .navbar { 
+                flex-direction: row; 
+                justify-content: space-between; 
+            }
+            .menu-toggle { 
+                display: block; /* Tampilkan Tombol Hamburger */
+            }
+            .menu { 
+                display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
+                flex-direction: column; 
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+                position: absolute;
+                top: 60px; /* Jarak dari Navbar */
+                left: 0;
+                padding: 10px 0;
+            }
+            .menu a {
+                margin: 0; 
+                padding: 10px 20px; 
+                border-bottom: 1px solid #eee;
+                color: #333; /* Pastikan warna teks menu di HP */
+            }
+            .menu a:last-child {
+                border-bottom: none;
+            }
+            /* Kelas ini yang akan memunculkan menu */
+            .menu.active { 
+                display: flex; 
+            }
+            /* END PERUBAHAN MENU HAMBURGER */
+            
             .features-container { flex-direction: column; }
             .footer-content { flex-direction: column; }
         }
@@ -124,11 +176,9 @@
     <nav class="navbar">
         <div class="logo">
             <img src="logo-koperasi.png" alt="Logo" class="logo-img">
-            Koperasi Desa Merah Putih <span>Lamunti Permai</span>
+            KDMP <span>Lamunti Permai</span>
         </div>
-        <div class="menu">
-            <a href="#" style="color: #D32F2F;">Beranda</a>
-            <a href="data-anggota.html">Data Anggota</a>
+        <div class="menu-toggle" id="menuToggle">☰</div>  <div class="menu" id="mainMenu">                 <a href="#" style="color: #D32F2F;">Beranda</a>  <a href="data-anggota.html">Data Anggota</a>
             <a href="unit-usaha.html">Unit Usaha</a>
             <a href="tentang-kami.html">Tentang Kami</a>
             <a href="galeri.html">Galeri</a>            
@@ -302,9 +352,32 @@
             var linkWA = "https://wa.me/" + nomorAdmin + "?text=" + pesan;
             window.open(linkWA, '_blank');
         }
-    </script>>
-        </div>
-    </section>
+
+        // --- FUNGSI MENU TOGGLE BARU & PENUTUP OTOMATIS ---
+
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        const menuLinks = mainMenu.querySelectorAll('a');
+
+        // 1. Event Listener untuk Tombol Toggle (Buka/Tutup Menu)
+        menuToggle.addEventListener('click', function() {
+            // Toggle class 'active' untuk menampilkan/menyembunyikan menu
+            mainMenu.classList.toggle('active');
+            // Toggle class 'open' untuk animasi ikon hamburger
+            menuToggle.classList.toggle('open');
+        });
+
+        // 2. Event Listener untuk Menutup Menu Setelah Tautan Diklik
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Pastikan menu tertutup saat tautan di HP diklik
+                if (mainMenu.classList.contains('active')) {
+                    mainMenu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                }
+            });
+        });
+    </script>
    
     <footer class="footer">
         <div class="footer-content">

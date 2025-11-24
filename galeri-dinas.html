@@ -11,19 +11,41 @@
         body { background-color: #f4f4f4; color: #333; line-height: 1.6; }
         
         /* Navbar Style */
-        .navbar { background-color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .navbar { 
+            background-color: #fff; display: flex; justify-content: space-between; align-items: center; 
+            padding: 10px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            position: fixed; width: 100%; top: 0; z-index: 1000; 
+        }
         
         /* Logo Fix */
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: bold; color: #D32F2F; }
+        .logo { 
+            display: flex; align-items: center; gap: 10px; font-weight: bold; 
+            color: #D32F2F; line-height: 1.2;
+        }
         .logo span { color: #2E7D32; }
         .logo-img { height: 40px; width: auto; }
         
-        .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; }
+        .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; transition: 0.3s; }
+        .menu a:hover { color: #D32F2F; }
+
+        /* --- MENU TOGGLE (HAMBURGER) BARU */
+        .menu-toggle {
+            display: none; /* Sembunyikan di desktop */
+            font-size: 2rem;
+            cursor: pointer;
+            color: #D32F2F;
+            order: 2; /* Agar berada di kanan */
+            transition: transform 0.3s ease; /* Transisi untuk animasi ikon */
+        }
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Putar ikon 90 derajat saat menu terbuka */
+            color: #2E7D32; 
+        }
 
         /* Container */
         .container { max-width: 1100px; margin: 80px auto 50px; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        h1 { color: #D32F2F; margin-bottom: 10px; text-align: center; }
+        h1 { color: #2E7D32; margin-bottom: 10px; text-align: center; }
         p.desc { text-align: center; max-width: 750px; margin: 0 auto 40px; color: #555; }
 
         /* --- GRID FOTO ALBUM --- */
@@ -64,10 +86,10 @@
 
 /* --- GAYA UNTUK FOOTER --- */
 .footer {
-    background-color: #2c3e50; /* Warna dasar gelap yang elegan */
+    background-color: #2c3e50; 
     color: #ecf0f1;
     padding: 40px 5%;
-    margin-top: 50px; /* Jarak dari konten atas */
+    margin-top: 50px; 
     font-size: 0.9rem;
 }
 .footer-content {
@@ -79,11 +101,11 @@
 }
 .footer-section {
     width: 30%;
-    min-width: 250px; /* Agar tidak terlalu kecil di HP */
+    min-width: 250px; 
     margin-bottom: 20px;
 }
 .footer-section h4 {
-    color: #D32F2F; /* Merah Koperasi */
+    color: #D32F2F; 
     margin-bottom: 15px;
     border-bottom: 1px solid #4a6d8c;
     padding-bottom: 5px;
@@ -91,12 +113,12 @@
 .footer-section a {
     color: #ecf0f1;
     text-decoration: none;
-    display: block; /* Agar setiap link di baris baru */
+    display: block; 
     margin-bottom: 5px;
     transition: color 0.3s;
 }
 .footer-section a:hover {
-    color: #2E7D32; /* Hijau Koperasi saat hover */
+    color: #2E7D32; 
 }
 .footer-bottom {
     text-align: center;
@@ -108,10 +130,46 @@
 
 /* --- FOOTER KOREKSI SPASI KONTAK --- */
         .footer-section p {
-            margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
+            margin-bottom: 5px; 
         }
 
 @media (max-width: 768px) {
+    /* START PERUBAHAN MENU HAMBURGER MOBILE */
+    .navbar { 
+        flex-direction: row; 
+        justify-content: space-between; 
+        padding: 10px 5%; 
+    }
+    .menu-toggle { 
+        display: block; /* Tampilkan Tombol Hamburger */
+    }
+    .menu { 
+        display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
+        flex-direction: column; 
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+        position: absolute;
+        top: 60px; /* Jarak dari Navbar */
+        left: 0;
+        padding: 10px 0;
+    }
+    .menu a {
+        margin: 0; 
+        padding: 10px 20px; 
+        border-bottom: 1px solid #eee;
+        color: #333; 
+    }
+    .menu a:last-child {
+        border-bottom: none;
+    }
+    /* Kelas ini yang akan memunculkan menu */
+    .menu.active { 
+        display: flex; 
+    }
+    /* END PERUBAHAN MENU HAMBURGER MOBILE */
+
+    /* Footer Responsive */
     .footer-content {
         flex-direction: column;
     }
@@ -120,64 +178,99 @@
         text-align: center;
     }
     .footer-section a {
-        display: inline-block;
-        margin: 0 10px;
+        display: block; 
+        margin: 5px auto;
+        width: fit-content;
+    }
+    
+    .container {
+        padding: 20px; 
     }
 }
 
-    </style>
+    
+</style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo">
             <img src="logo-koperasi.png" alt="Logo" class="logo-img">
-            Koperasi Desa Merah Putih
+            KDMP <span>Lamunti Permai</span>
         </div>
-        <div class="menu">
+        
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        
+        <div class="menu" id="mainMenu">
             <a href="index.html">Beranda</a>
-            <a href="galeri.html">Galeri Utama</a>
+            <a href="data-anggota.html">Data Anggota</a>
+            <a href="unit-usaha.html">Unit Usaha</a>
+            <a href="tentang-kami.html">Tentang Kami</a>
+            <a href="galeri.html" style="color: #D32F2F;">Galeri</a>
+            <a href="kontak.html">Kontak</a>
         </div>
     </nav>
 
     <div class="container">
-        <h1>Album: Kunjungan Dinas & Studi Banding</h1>
-        <p class="desc">Dokumentasi kegiatan pembinaan dari Dinas Koperasi Kabupaten Kapuas, pemeriksaan kesehatan koperasi, serta kunjungan studi banding pengurus untuk meningkatkan wawasan manajemen koperasi.</p>
+        <h1>Album: Kunjungan Dinas & Pelatihan</h1>
+        <p class="desc">Dokumentasi kegiatan resmi yang melibatkan Dinas Koperasi dan UKM serta kegiatan pelatihan untuk pengurus dan anggota, menunjukkan komitmen Koperasi terhadap tata kelola yang baik dan pengembangan SDM.</p>
 
         <div class="album-grid">
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600" alt="Salaman dengan Dinas">
-                <div class="photo-caption">Kunjungan Pembinaan Dinas Koperasi Kapuas</div>
+                <img src="https://images.unsplash.com/photo-1543269664-7eef42226a2e?w=600" alt="Pelatihan Keuangan">
+                <div class="photo-caption">Pelatihan Manajemen Keuangan Koperasi</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600" alt="Audit Ringan">
-                <div class="photo-caption">Pemeriksaan Kelengkapan Administrasi</div>
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884994?w=600" alt="Kunjungan Dinas">
+                <div class="photo-caption">Kunjungan Monitoring dari Dinas Koperasi</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600" alt="Foto Bersama">
-                <div class="photo-caption">Foto Bersama di Depan Kantor Koperasi</div>
+                <img src="https://images.unsplash.com/photo-1558485202-09419b4b0e8c?w=600" alt="Sertifikasi">
+                <div class="photo-caption">Penyerahan Sertifikat Pelatihan Anggota</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600" alt="Studi Banding">
-                <div class="photo-caption">Studi Banding ke Koperasi Unggulan Lain</div>
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600" alt="Rapat Pleno">
+                <div class="photo-caption">Rapat Pleno dan Evaluasi Pengurus</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600" alt="Pelatihan Pengurus">
-                <div class="photo-caption">Pelatihan Peningkatan Kapasitas Pengurus</div>
+                <img src="https://images.unsplash.com/photo-1522204523234-8729aa6e993e?w=600" alt="Presentasi">
+                <div class="photo-caption">Presentasi Laporan Tahunan di Hadapan Dinas</div>
             </div>
             
              <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=600" alt="Cinderamata">
-                <div class="photo-caption">Penyerahan Cinderamata Kunjungan</div>
+                <img src="https://images.unsplash.com/photo-1556761175-4b46a57b9266?w=600" alt="Workshop">
+                <div class="photo-caption">Workshop Digitalisasi Usaha Koperasi</div>
             </div>
         </div>
 
         <a href="galeri.html" class="btn-back">← Kembali ke Galeri Utama</a>
     </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        const menuLinks = mainMenu.querySelectorAll('a'); 
+
+        // 1. Event Listener untuk Tombol Toggle (Buka/Tutup Menu)
+        menuToggle.addEventListener('click', function() {
+            mainMenu.classList.toggle('active'); // Toggle class 'active' untuk menampilkan/menyembunyikan menu
+            menuToggle.classList.toggle('open'); // Toggle class 'open' untuk animasi ikon hamburger
+        });
+
+        // 2. Event Listener untuk Menutup Menu Setelah Tautan Diklik
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainMenu.classList.contains('active')) {
+                    mainMenu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                }
+            });
+        });
+    </script>
 
 <footer class="footer">
     <div class="footer-content">

@@ -10,20 +10,42 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #f4f4f4; color: #333; line-height: 1.6; }
         
-        /* Navbar Style (Sudah disesuaikan) */
-        .navbar { background-color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        /* Navbar Style */
+        .navbar { 
+            background-color: #fff; display: flex; justify-content: space-between; align-items: center; 
+            padding: 10px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            position: fixed; width: 100%; top: 0; z-index: 1000; 
+        }
         
         /* Logo Fix */
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: bold; color: #D32F2F; }
+        .logo { 
+            display: flex; align-items: center; gap: 10px; font-weight: bold; 
+            color: #D32F2F; line-height: 1.2; 
+        }
         .logo span { color: #2E7D32; }
         .logo-img { height: 40px; width: auto; }
         
-        .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; }
+        .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; transition: 0.3s; }
+        .menu a:hover { color: #D32F2F; }
+
+        /* --- MENU TOGGLE (HAMBURGER) BARU */
+        .menu-toggle {
+            display: none; /* Sembunyikan di desktop */
+            font-size: 2rem;
+            cursor: pointer;
+            color: #D32F2F;
+            order: 2; /* Agar berada di kanan */
+            transition: transform 0.3s ease; /* Transisi untuk animasi ikon */
+        }
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Putar ikon 90 derajat saat menu terbuka */
+            color: #2E7D32; 
+        }
 
         /* Container */
         .container { max-width: 1100px; margin: 80px auto 50px; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        h1 { color: #D32F2F; margin-bottom: 10px; text-align: center; }
+        h1 { color: #2E7D32; margin-bottom: 10px; text-align: center; }
         p.desc { text-align: center; max-width: 750px; margin: 0 auto 40px; color: #555; }
 
         /* --- GRID FOTO ALBUM --- */
@@ -64,10 +86,10 @@
 
 /* --- GAYA UNTUK FOOTER --- */
 .footer {
-    background-color: #2c3e50; /* Warna dasar gelap yang elegan */
+    background-color: #2c3e50; 
     color: #ecf0f1;
     padding: 40px 5%;
-    margin-top: 50px; /* Jarak dari konten atas */
+    margin-top: 50px; 
     font-size: 0.9rem;
 }
 .footer-content {
@@ -79,11 +101,11 @@
 }
 .footer-section {
     width: 30%;
-    min-width: 250px; /* Agar tidak terlalu kecil di HP */
+    min-width: 250px; 
     margin-bottom: 20px;
 }
 .footer-section h4 {
-    color: #D32F2F; /* Merah Koperasi */
+    color: #D32F2F; 
     margin-bottom: 15px;
     border-bottom: 1px solid #4a6d8c;
     padding-bottom: 5px;
@@ -91,12 +113,12 @@
 .footer-section a {
     color: #ecf0f1;
     text-decoration: none;
-    display: block; /* Agar setiap link di baris baru */
+    display: block; 
     margin-bottom: 5px;
     transition: color 0.3s;
 }
 .footer-section a:hover {
-    color: #2E7D32; /* Hijau Koperasi saat hover */
+    color: #2E7D32; 
 }
 .footer-bottom {
     text-align: center;
@@ -108,10 +130,46 @@
 
 /* --- FOOTER KOREKSI SPASI KONTAK --- */
         .footer-section p {
-            margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
+            margin-bottom: 5px; 
         }
 
 @media (max-width: 768px) {
+    /* START PERUBAHAN MENU HAMBURGER MOBILE */
+    .navbar { 
+        flex-direction: row; 
+        justify-content: space-between; 
+        padding: 10px 5%; 
+    }
+    .menu-toggle { 
+        display: block; /* Tampilkan Tombol Hamburger */
+    }
+    .menu { 
+        display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
+        flex-direction: column; 
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+        position: absolute;
+        top: 60px; /* Jarak dari Navbar */
+        left: 0;
+        padding: 10px 0;
+    }
+    .menu a {
+        margin: 0; 
+        padding: 10px 20px; 
+        border-bottom: 1px solid #eee;
+        color: #333; 
+    }
+    .menu a:last-child {
+        border-bottom: none;
+    }
+    /* Kelas ini yang akan memunculkan menu */
+    .menu.active { 
+        display: flex; 
+    }
+    /* END PERUBAHAN MENU HAMBURGER MOBILE */
+
+    /* Footer Responsive */
     .footer-content {
         flex-direction: column;
     }
@@ -120,64 +178,99 @@
         text-align: center;
     }
     .footer-section a {
-        display: inline-block;
-        margin: 0 10px;
+        display: block; 
+        margin: 5px auto;
+        width: fit-content;
+    }
+    
+    .container {
+        padding: 20px; 
     }
 }
 
-    </style>
+    
+</style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo">
             <img src="logo-koperasi.png" alt="Logo" class="logo-img">
-            Koperasi Desa Merah Putih
+            KDMP <span>Lamunti Permai</span>
         </div>
-        <div class="menu">
+        
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        
+        <div class="menu" id="mainMenu">
             <a href="index.html">Beranda</a>
-            <a href="galeri.html">Galeri Utama</a>
+            <a href="data-anggota.html">Data Anggota</a>
+            <a href="unit-usaha.html">Unit Usaha</a>
+            <a href="tentang-kami.html">Tentang Kami</a>
+            <a href="galeri.html" style="color: #D32F2F;">Galeri</a>
+            <a href="kontak.html">Kontak</a>
         </div>
     </nav>
 
     <div class="container">
-        <h1>Album: Penyaluran Pupuk Subsidi</h1>
-        <p class="desc">Dokumentasi proses pendistribusian pupuk bersubsidi (Urea & NPK) kepada anggota kelompok tani sesuai data e-RDKK. Koperasi menjamin penyaluran yang transparan, harga sesuai HET, dan tepat waktu menyambut musim tanam.</p>
+        <h1>Album: Penyaluran Pupuk dan Sarana Tani</h1>
+        <p class="desc">Dokumentasi kegiatan penyaluran pupuk bersubsidi, benih, dan sarana pertanian lainnya kepada anggota Koperasi, memastikan ketersediaan dan kelancaran proses tanam.</p>
 
         <div class="album-grid">
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600" alt="Kedatangan Truk Pupuk">
-                <div class="photo-caption">Kedatangan Stok Pupuk dari Distributor</div>
+                <img src="https://images.unsplash.com/photo-1594953931326-8360ca024b45?w=600" alt="Penumpukan Pupuk">
+                <div class="photo-caption">Penumpukan Pupuk di Gudang Koperasi</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600" alt="Stok di Gudang">
-                <div class="photo-caption">Stok Aman di Gudang Koperasi</div>
+                <img src="https://images.unsplash.com/photo-1610484964648-522f2f75a7c9?w=600" alt="Penyaluran Pupuk ke Anggota">
+                <div class="photo-caption">Penyaluran Pupuk kepada Anggota di Lokasi</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600" alt="Pengecekan Data">
-                <div class="photo-caption">Verifikasi Data Anggota (e-RDKK)</div>
+                <img src="https://images.unsplash.com/photo-1617068565155-24458d3568c4?w=600" alt="Antrian Pengambilan Pupuk">
+                <div class="photo-caption">Antrian Pengambilan Pupuk di Unit Usaha</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=600" alt="Antrian Petani">
-                <div class="photo-caption">Anggota Mengantre dengan Tertib</div>
+                <img src="https://images.unsplash.com/photo-1599026335193-cd288d649433?w=600" alt="Bantuan Benih Unggul">
+                <div class="photo-caption">Bantuan Benih Unggul untuk Musim Tanam</div>
             </div>
             
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1589923188900-85dae5233296?w=600" alt="Serah Terima Pupuk">
-                <div class="photo-caption">Penyerahan Pupuk kepada Petani</div>
+                <img src="https://images.unsplash.com/photo-1544265132-ec2251a3b934?w=600" alt="Gudang Persediaan">
+                <div class="photo-caption">Pengecekan Stok Pupuk oleh Pengurus</div>
             </div>
             
              <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1625246333195-58f2167038fa?w=600" alt="Petani Membawa Pupuk">
-                <div class="photo-caption">Siap Menyambut Musim Tanam</div>
+                <img src="https://images.unsplash.com/photo-1596798725807-68b3c8f8b0e7?w=600" alt="Sarana Tani">
+                <div class="photo-caption">Penyediaan Sarana Tani Lainnya</div>
             </div>
         </div>
 
         <a href="galeri.html" class="btn-back">← Kembali ke Galeri Utama</a>
     </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        const menuLinks = mainMenu.querySelectorAll('a'); 
+
+        // 1. Event Listener untuk Tombol Toggle (Buka/Tutup Menu)
+        menuToggle.addEventListener('click', function() {
+            mainMenu.classList.toggle('active'); // Toggle class 'active' untuk menampilkan/menyembunyikan menu
+            menuToggle.classList.toggle('open'); // Toggle class 'open' untuk animasi ikon hamburger
+        });
+
+        // 2. Event Listener untuk Menutup Menu Setelah Tautan Diklik
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainMenu.classList.contains('active')) {
+                    mainMenu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                }
+            });
+        });
+    </script>
 
 <footer class="footer">
     <div class="footer-content">

@@ -22,6 +22,20 @@
         .logo-img { height: 40px; width: auto; }
         .menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; transition: 0.3s; }
         .menu a:hover { color: #D32F2F; }
+        
+        /* --- MENU TOGGLE (HAMBURGER) BARU */
+        .menu-toggle {
+            display: none; /* Sembunyikan di desktop */
+            font-size: 2rem;
+            cursor: pointer;
+            color: #D32F2F;
+            order: 2; /* Agar berada di kanan */
+            transition: transform 0.3s ease; /* Transisi untuk animasi ikon */
+        }
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Putar ikon 90 derajat saat menu terbuka */
+            color: #2E7D32; 
+        }
 
         /* --- CONTAINER (ISI HALAMAN) --- */
         .container {
@@ -113,10 +127,48 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 10px; padding: 15px; }
-            .menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+            
+            /* START PERUBAHAN MENU HAMBURGER MOBILE */
+            .navbar { 
+                flex-direction: row; /* Kembali ke tata letak baris */
+                justify-content: space-between; 
+                padding: 10px 5%; 
+            }
+            .menu-toggle { 
+                display: block; /* Tampilkan Tombol Hamburger */
+            }
+            .menu { 
+                display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
+                flex-direction: column; 
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+                position: absolute;
+                top: 60px; /* Jarak dari Navbar */
+                left: 0;
+                padding: 10px 0;
+            }
+            .menu a {
+                margin: 0; 
+                padding: 10px 20px; 
+                border-bottom: 1px solid #eee;
+                color: #333; 
+            }
+            .menu a:last-child {
+                border-bottom: none;
+            }
+            /* Kelas ini yang akan memunculkan menu */
+            .menu.active { 
+                display: flex; 
+            }
+            /* END PERUBAHAN MENU HAMBURGER MOBILE */
+            
             .container { padding: 20px; margin-top: 80px; }
             .contact-info { grid-template-columns: 1fr; }
+
+            /* Footer Responsive */
+            .footer-content { flex-direction: column; } 
+            .footer-section { width: 100%; text-align: center; } 
         }
 
         /* --- CSS FOOTER --- */
@@ -128,12 +180,10 @@
         .footer-section a:hover { color: #2E7D32; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #4a6d8c; margin-top: 20px; font-size: 0.8rem; }
 
-/* --- FOOTER KOREKSI SPASI KONTAK --- */
+        /* --- FOOTER KOREKSI SPASI KONTAK --- */
         .footer-section p {
-            margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
-        }        
-
-@media (max-width: 768px) { .footer-content { flex-direction: column; } .footer-section { width: 100%; text-align: center; } }
+            margin-bottom: 5px; 
+        }
     </style>
 </head>
 <body>
@@ -141,9 +191,12 @@
     <nav class="navbar">
         <div class="logo">
             <img src="logo-koperasi.png" alt="Logo" class="logo-img">
-            Koperasi Desa Merah Putih <span>Lamunti Permai</span>
+            KDMP <span>Lamunti Permai</span>
         </div>
-        <div class="menu">
+        
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        
+        <div class="menu" id="mainMenu">
             <a href="index.html">Beranda</a>
             <a href="data-anggota.html">Data Anggota</a>            
             <a href="unit-usaha.html">Unit Usaha</a>
@@ -189,7 +242,7 @@
         <p>Anda dapat menemukan lokasi kantor kami melalui peta di bawah ini:</p>
         <div class="map-placeholder">
              <iframe 
-                 src="https://maps.google.com/maps?q=-2.601379,114.450435&amp;z=17&amp;output=embed"
+                 src="https://maps.google.com/maps?q=-2.601379,114.450435&z=17&output=embed"
                  width="100%" 
                  height="450" 
                  style="border:0;" 
@@ -237,7 +290,28 @@
             }
         </script>
         </div>
-    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        const menuLinks = mainMenu.querySelectorAll('a'); 
+
+        // 1. Event Listener untuk Tombol Toggle (Buka/Tutup Menu)
+        menuToggle.addEventListener('click', function() {
+            mainMenu.classList.toggle('active'); // Toggle class 'active' untuk menampilkan/menyembunyikan menu
+            menuToggle.classList.toggle('open'); // Toggle class 'open' untuk animasi ikon hamburger
+        });
+
+        // 2. Event Listener untuk Menutup Menu Setelah Tautan Diklik
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainMenu.classList.contains('active')) {
+                    mainMenu.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                }
+            });
+        });
+    </script>
 
     <footer class="footer">
         <div class="footer-content">
