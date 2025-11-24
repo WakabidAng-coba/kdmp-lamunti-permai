@@ -124,7 +124,13 @@
         .footer-section a { color: #ecf0f1; text-decoration: none; display: block; margin-bottom: 5px; transition: color 0.3s; }
         .footer-section a:hover { color: #2E7D32; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #4a6d8c; margin-top: 20px; font-size: 0.8rem; }
-        @media (max-width: 768px) { .footer-content { flex-direction: column; } .footer-section { width: 100%; text-align: center; } }
+
+/* --- FOOTER KOREKSI SPASI KONTAK --- */
+        .footer-section p {
+            margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
+        }       
+
+ @media (max-width: 768px) { .footer-content { flex-direction: column; } .footer-section { width: 100%; text-align: center; } }
     </style>
 </head>
 <body>

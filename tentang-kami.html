@@ -125,7 +125,13 @@
             /* Pengawas tetap 2 kolom di HP sedang */
             .team-grid:not(.staggered-grid) { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 480px) {
+        
+/* --- FOOTER KOREKSI SPASI KONTAK --- */
+        .footer-section p {
+            margin-bottom: 5px; /* Mengganti margin 15px global menjadi 5px untuk kontak */
+        }
+
+@media (max-width: 480px) {
             .team-grid { grid-template-columns: 1fr; }
         }
 
