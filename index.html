@@ -79,11 +79,7 @@
 
         /* --- FITUR --- */
         .features-container { display: flex; justify-content: space-between; gap: 30px; }
-        .feature-card {
-            background: white; padding: 30px; border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; flex: 1;
-            transition: transform 0.3s; border-top: 5px solid #D32F2F;
-        }
+        .feature-card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; flex: 1;  transition: transform 0.3s; border-top: 5px solid #D32F2F; }
         .feature-card:hover { transform: translateY(-10px); }
         .icon-emoji { font-size: 3rem; margin-bottom: 15px; display: block; }
 
@@ -131,14 +127,20 @@
         
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            
+            .hero p { font-size: 1rem; }
+            .btn-container { flex-direction: column; gap: 10px; }
+            .btn { width: 100%; }
+            .section-padding { padding: 50px 5%; }
+            .section-title h2 { font-size: 2rem; }
+            .features-container { flex-direction: column; }
+            .service-item { flex-direction: column; }
+            .service-img, .service-content { width: 100%; height: auto; }
+            .service-img { height: 150px; }
+            .service-content { padding: 15px; }
+
             /* START PERUBAHAN MENU HAMBURGER */
-            .navbar { 
-                flex-direction: row; 
-                justify-content: space-between; 
-            }
-            .menu-toggle { 
-                display: block; /* Tampilkan Tombol Hamburger */
+            .navbar { flex-direction: row;  justify-content: space-between; }
+            .menu-toggle { display: block; /* Tampilkan Tombol Hamburger */
             }
             .menu { 
                 display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
@@ -151,23 +153,27 @@
                 left: 0;
                 padding: 10px 0;
             }
-            .menu a {
-                margin: 0; 
-                padding: 10px 20px; 
-                border-bottom: 1px solid #eee;
-                color: #333; /* Pastikan warna teks menu di HP */
+            .menu a { margin: 0; padding: 10px 20px; border-bottom: 1px solid #eee; color: #333; /* Pastikan warna teks menu di HP */
             }
-            .menu a:last-child {
-                border-bottom: none;
-            }
+            .menu a:last-child { border-bottom: none; }
             /* Kelas ini yang akan memunculkan menu */
-            .menu.active { 
-                display: flex; 
-            }
+            .menu.active { display: flex; }
             /* END PERUBAHAN MENU HAMBURGER */
             
-            .features-container { flex-direction: column; }
-            .footer-content { flex-direction: column; }
+            /* ==================== FOOTER RESPONSIVE FIX ==================== */
+            .footer-content { 
+                flex-direction: column; /* FIX: Paksa kolom ke bawah di HP */
+            }
+            .footer-section { 
+                width: 100%; 
+                text-align: center; /* FIX: Rata tengah semua konten di HP */
+            }
+            .footer-section a {
+                display: block;
+                margin: 5px auto;
+                width: fit-content;
+            }
+            /* ==================== END FOOTER RESPONSIVE FIX ==================== */
         }
     </style>
 </head>
@@ -178,7 +184,10 @@
             <img src="logo-koperasi.png" alt="Logo" class="logo-img">
             KDMP <span>Lamunti Permai</span>
         </div>
-        <div class="menu-toggle" id="menuToggle">☰</div>  <div class="menu" id="mainMenu">                 <a href="#" style="color: #D32F2F;">Beranda</a>  <a href="data-anggota.html">Data Anggota</a>
+        <div class="menu-toggle" id="menuToggle">☰</div>  
+        <div class="menu" id="mainMenu">                 
+            <a href="#" style="color: #D32F2F;">Beranda</a>  
+            <a href="data-anggota.html">Data Anggota</a>
             <a href="unit-usaha.html">Unit Usaha</a>
             <a href="tentang-kami.html">Tentang Kami</a>
             <a href="galeri.html">Galeri</a>            
