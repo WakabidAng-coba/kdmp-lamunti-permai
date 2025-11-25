@@ -33,14 +33,12 @@
             transition: transform 0.3s ease; /* Transisi untuk animasi ikon */
         }
         /* KELAS BARU UNTUK ANIMASI IKON */
-.menu-toggle.open {
-    /* Putar ikon 90 derajat saat menu terbuka */
-    transform: rotate(90deg); 
-    color: #2E7D32; /* Ubah warna saat terbuka (opsional) */
-}
-/* ... kode CSS lainnya ... */
+        .menu-toggle.open {
+            /* Putar ikon 90 derajat saat menu terbuka */
+            transform: rotate(90deg); 
+            color: #2E7D32; /* Ubah warna saat terbuka (opsional) */
+        }
 
-        
         /* --- CONTAINER (ISI HALAMAN) --- */
         .container {
             max-width: 900px; 
@@ -70,7 +68,7 @@
         /* --- GRID HAK & KEWAJIBAN --- */
         .info-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr; /* Default: 2 kolom berdampingan */
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -127,6 +125,7 @@
             margin-bottom: 5px; 
         }
         
+        /* --- RESPONSIVE (MOBILE) --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 1rem; }
@@ -142,8 +141,7 @@
 
             /* START PERUBAHAN MENU HAMBURGER */
             .navbar { flex-direction: row;  justify-content: space-between; }
-            .menu-toggle { display: block; /* Tampilkan Tombol Hamburger */
-            }
+            .menu-toggle { display: block; /* Tampilkan Tombol Hamburger */ }
             .menu { 
                 display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
                 flex-direction: column; 
@@ -155,13 +153,16 @@
                 left: 0;
                 padding: 10px 0;
             }
-            .menu a { margin: 0; padding: 10px 20px; border-bottom: 1px solid #eee; color: #333; /* Pastikan warna teks menu di HP */
-            }
+            .menu a { margin: 0; padding: 10px 20px; border-bottom: 1px solid #eee; color: #333; }
             .menu a:last-child { border-bottom: none; }
-            /* Kelas ini yang akan memunculkan menu */
             .menu.active { display: flex; }
             /* END PERUBAHAN MENU HAMBURGER */
             
+            /* --- PERBAIKAN HAK & KEWAJIBAN (Disusun Vertikal) --- */
+            .info-grid { 
+                grid-template-columns: 1fr; /* Ubah menjadi 1 kolom */
+            }
+
             /* ==================== FOOTER RESPONSIVE FIX ==================== */
             .footer-content { 
                 flex-direction: column; /* FIX: Paksa kolom ke bawah di HP */
