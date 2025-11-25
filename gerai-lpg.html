@@ -140,56 +140,80 @@
         }       
 
         /* --- RESPONSIVE (MOBILE) --- */
-        @media (max-width: 768px) {
-            /* START PERUBAHAN MENU HAMBURGER MOBILE */
-            .navbar { 
-                flex-direction: row; 
-                justify-content: space-between; 
-                padding: 10px 5%; 
-            }
-            .menu-toggle { 
-                display: block; /* Tampilkan Tombol Hamburger */
-            }
-            .menu { 
-                display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
-                flex-direction: column; 
-                width: 100%;
-                background-color: #fff;
-                box-shadow: 0 5px 5px rgba(0,0,0,0.05);
-                position: absolute;
-                top: 60px; /* Jarak dari Navbar */
-                left: 0;
-                padding: 10px 0;
-            }
-            .menu a {
-                margin: 0; 
-                padding: 10px 20px; 
-                border-bottom: 1px solid #eee;
-                color: #333; 
-            }
-            .menu a:last-child {
-                border-bottom: none;
-            }
-            /* Kelas ini yang akan memunculkan menu */
-            .menu.active { 
-                display: flex; 
-            }
-            /* END PERUBAHAN MENU HAMBURGER MOBILE */
+        
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .hero p { font-size: 1rem; }
+    .btn-container { flex-direction: column; gap: 10px; }
+    .btn { width: 100%; }
+    .section-padding { padding: 50px 5%; }
+    .section-title h2 { font-size: 2rem; }
+    .features-container { flex-direction: column; }
+    .service-item { flex-direction: column; }
+    .service-img, .service-content { width: 100%; height: auto; }
+    .service-img { height: 150px; }
+    .service-content { padding: 15px; }
 
-            /* Retain other responsive styles */
-            .container { padding: 20px; margin-top: 80px; }
-            .product-grid { flex-direction: column; }
+    /* START PERUBAHAN MENU HAMBURGER */
+    .navbar { flex-direction: row;  justify-content: space-between; }
+    .menu-toggle { display: block; /* Tampilkan Tombol Hamburger */
+    }
+    .menu { 
+        display: none; /* SEMBUNYIKAN MENU SECARA DEFAULT */
+        flex-direction: column; 
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+        position: absolute;
+        top: 60px; /* Jarak dari Navbar */
+        left: 0;
+        padding: 10px 0;
+    }
+    .menu a { margin: 0; padding: 10px 20px; border-bottom: 1px solid #eee; color: #333; /* Pastikan warna teks menu di HP */
+    }
+    .menu a:last-child { border-bottom: none; }
+    /* Kelas ini yang akan memunculkan menu */
+    .menu.active { display: flex; }
+    /* END PERUBAHAN MENU HAMBURGER */
+    
+    /* ==================== FOOTER RESPONSIVE FIX BARU (Opsi 1) ==================== */
+    
+    /* FIX: Paksa kolom ke bawah di HP (tetap) */
+    .footer-content { 
+        flex-direction: column; 
+    }
+    
+    /* FIX: Rata tengah semua konten di HP (tetap) */
+    .footer-section { 
+        width: 100%; 
+        text-align: center; 
+    }
 
-            /* Footer Responsive */
-            .footer-content { flex-direction: column; } 
-            .footer-section { width: 100%; text-align: center; }
-            .footer-section a {
-                display: block; 
-                margin: 5px auto;
-                width: fit-content;
-            }
-        }
-    </style>
+    /* Targetkan bagian Navigasi (bagian kedua di HTML) */
+    .footer-section:nth-child(2) { 
+        padding-top: 10px; /* Sedikit jarak dari bagian atas */
+        padding-bottom: 10px;
+    }
+
+    /* Terapkan tampilan horizontal ke tautan navigasi */
+    .footer-section:nth-child(2) a {
+        display: inline-block; /* Mengubah dari block menjadi inline-block agar bersebelahan */
+        margin: 5px 8px; /* Atur jarak antar tautan */
+        width: auto; /* Lebar sesuai konten */
+        /* Tambahkan garis pemisah vertikal opsional */
+        border-right: 1px solid #4a6d8c; 
+        padding-right: 8px;
+    }
+    
+    /* Hapus garis pemisah di tautan terakhir */
+    .footer-section:nth-child(2) a:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+    /* ==================== END FOOTER RESPONSIVE FIX BARU (Opsi 1) ==================== */
+}
+
+</style>
 </head>
 <body>
 
