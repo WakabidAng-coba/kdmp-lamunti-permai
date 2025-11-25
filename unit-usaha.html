@@ -142,7 +142,7 @@
         .footer-section a:hover { color: #2E7D32; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #4a6d8c; margin-top: 20px; font-size: 0.8rem; }
         
-/* --- FOOTER KOREKSI SPASI KONTAK --- */
+        /* --- FOOTER KOREKSI SPASI KONTAK --- */
         .footer-section p {
             margin-bottom: 5px; 
         }
@@ -150,17 +150,7 @@
         /* --- RESPONSIVE UNTUK MOBILE --- */
         
 @media (max-width: 768px) {
-    .hero h1 { font-size: 2rem; }
-    .hero p { font-size: 1rem; }
-    .btn-container { flex-direction: column; gap: 10px; }
-    .btn { width: 100%; }
-    .section-padding { padding: 50px 5%; }
-    .section-title h2 { font-size: 2rem; }
-    .features-container { flex-direction: column; }
-    .service-item { flex-direction: column; }
-    .service-img, .service-content { width: 100%; height: auto; }
-    .service-img { height: 150px; }
-    .service-content { padding: 15px; }
+    .container { padding: 20px; margin-top: 80px; } /* Sesuaikan container untuk HP */
 
     /* START PERUBAHAN MENU HAMBURGER */
     .navbar { flex-direction: row;  justify-content: space-between; }
@@ -184,6 +174,19 @@
     .menu.active { display: flex; }
     /* END PERUBAHAN MENU HAMBURGER */
     
+    /* === FIX BARU: Perbaiki posisi kotak unit usaha di HP agar center === */
+    .unit-grid {
+        grid-template-columns: 1fr; /* Paksa satu kolom penuh */
+        justify-items: center; /* Pusatkan item (kartu) dalam grid track */
+        gap: 25px; /* Sesuaikan jarak antar kartu */
+    }
+    /* Opsional: Berikan lebar yang lebih spesifik pada kartu agar lebih rapi */
+    .unit-card {
+        width: 90%; 
+        max-width: 400px;
+    }
+    /* =================================================================== */
+
     /* ==================== FOOTER RESPONSIVE FIX BARU (Opsi 1) ==================== */
     
     /* FIX: Paksa kolom ke bawah di HP (tetap) */
@@ -244,7 +247,7 @@
     </nav>
 
     <div class="container">
-        <h1>🏬 Unit Usaha Koperasi</h1>
+        <h1>🛠️ Unit Usaha Koperasi</h1>
         <p style="text-align: center; margin-bottom: 30px; color: #555;">Koperasi Desa Merah Putih mengelola tiga unit usaha utama yang bertujuan untuk melayani kebutuhan pokok dan mendukung ekonomi anggota di Lamunti Permai.</p>
 
         <div class="unit-grid">
